@@ -1,6 +1,6 @@
 defmodule Coqex do
   @moduledoc """
-  Documentation for `Coqex`.
+  Coqex: A Coq-Elixir binding.
   """
 
   @doc """

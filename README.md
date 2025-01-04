@@ -1,6 +1,6 @@
 # Coqex
 
-**TODO: Add description**
+Coqex: A Coq-Elixir binding
 
 ## Installation
 
