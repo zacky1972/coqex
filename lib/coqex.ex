@@ -20,4 +20,19 @@ defmodule Coqex do
     |> is_nil()
     |> Kernel.!()
   end
+
+  @spec pull_coq() :: [binary()]
+  @doc """
+  Pulls Docker image of Coq.
+  """
+  def pull_coq() do
+    if docker_exists?() do
+      case System.cmd(docker_executable(), ["pull", "coqorg/coq:latest", "--quiet"], into: [], stderr_to_stdout: true) do
+        {result, 0} -> Enum.map(result, &String.trim/1)
+        {reason, _} -> raise RuntimeError, reason |> Enum.filter(&String.match?(&1, ~r/Cannot|Fail/)) |> Enum.join("\n")
+      end
+    else
+      raise RuntimeError, "Docker is not avaiable."
+    end
+  end
 end
